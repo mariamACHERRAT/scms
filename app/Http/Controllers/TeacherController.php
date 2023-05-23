@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Mail\NewUserPassword;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,10 +33,13 @@ class TeacherController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email=$request->email;
+        $password = Str::random(8); // generate a random password
         $user->password = Hash::make('password');
         $user->is_prof = true;
         $user->save(); 
-
+        
+        // send email to the new user
+        Mail::to($user->email)->send(new NewUserPassword($user, $password));
         return redirect("/teacher");
     }
 

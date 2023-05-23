@@ -1,13 +1,13 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 h-20 ...">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 h-20 shadow-lg">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    
                     <img src="{{ asset('image/logo.png') }}" class="w-20 ... mt-0" alt="" srcset="">
-                    </a>
+                 
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                     <x-nav-link :href="route('cours')" :active="request()->routeIs('dashboard')" class="text-black">
@@ -36,7 +36,23 @@
                 @if ($user->is_prof)
                     <x-nav-link :href="route('teacher_coureses')" :active="request()->routeIs('dashboard')" class="text-black">
                         {{ __('My Lessons') }}
+                
                     </x-nav-link>
+                    <x-nav-link :href="route('requests')" :active="request()->routeIs('dashboard')" class="text-black">
+                        {{ __('Requests') }}
+                
+                    </x-nav-link>
+                    @endif
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
+                <?php $user =Auth::user()?>
+                @if ($user->is_etudiant)
+                <x-nav-link :href="route('my-course')" class="text-black">
+    {{ __('My Lessons') }}
+</x-nav-link>
+
+                  
                     @endif
                 </div>
                 

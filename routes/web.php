@@ -7,7 +7,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SectionController;
-
+use App\Http\Controllers\RequestController;
+use App\Http\Controllers\StudentCourseController;
 
 use App\Http\Middleware\CheckRoles;
 /*
@@ -24,10 +25,7 @@ use App\Http\Middleware\CheckRoles;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/cours', function () {
-    return view('cours');
-})->name('cours');
-
+Route::get('/cours', [CourseController::class, 'display'])->name('cours');
 Route::get('/courses/{id}', [CourseController::class, 'show'])->name('course.show');
 
 //forgot password 
@@ -62,7 +60,8 @@ Route::middleware('auth')->group(function () {
         //student
         Route::get("/student",[StudentController::class,"student_list"])->name("student_list");
         Route::get("/student/create",[StudentController::class,"create"])->name("student.create");
-        Route::get("store",[StudentController::class,"store"])->name('store');
+        Route::post("/students", [StudentController::class, "store"])->name("students.store");
+
         Route::get('/students/{id}/edit',[StudentController::class,"edit"])->name('students.edit');
         Route::put('/students/{id}',[StudentController::class,"update"])->name('students.update');
         Route::delete('/students/{id}',[StudentController::class,"destroy"])->name('students.destroy');
@@ -71,7 +70,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get("/teacher",[TeacherController::class,"teacher_list"])->name("teacher_list");
         Route::get("/teacher/create",[TeacherController::class,"create"])->name("teacher.create");
-        Route::get("store",[TeacherController::class,"store"])->name('store');
+        Route::get("store",[TeacherController::class,"store"])->name('teacher-store');
         Route::get('/teachers/{id}/edit',[TeacherController::class,"edit"])->name('teachers.edit');
         Route::put('/teachers/{id}',[TeacherController::class,"update"])->name('teachers.update');
         Route::delete('/teachers/{id}',[TeacherController::class,"destroy"])->name('teachers.destroy');
@@ -82,24 +81,46 @@ Route::middleware('auth')->group(function () {
         //coure
         Route::get("/courses",[CourseController::class,"index"])->name("teacher_coureses");
         Route::get("/course/create",[CourseController::class,"create"])->name("course.create");
-        Route::post("store",[CourseController::class,"store"])->name('store');
+        Route::post("store",[CourseController::class,"store"])->name('courses.store');
         Route::get('/courses/{id}/edit',[CourseController::class,"edit"])->name('courses.edit');
         Route::put('/courses/{id}',[CourseController::class,"update"])->name('courses.update');
-        Route::delete('/students/{id}',[CourseController::class,"destroy"])->name('students.destroy');
+        Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+       Route::get('/courses/{course}/publish',[CourseController::class, 'publish'])->name('publish-course');
+
+
+
         
 
         //section
         Route::get('/add-section', function () {
             return view('add-section');
         })->name("add.section");
+        Route::get('/sections', [SectionController::class, 'index'])->name('sections.index');
+
         Route::get('/sections/create', [SectionController::class, 'create'])->name('sections.create');
-Route::post('/sections', [SectionController::class, 'store'])->name('sections.store');
-Route::get('/sections/{section}', [SectionController::class, 'show'])->name('sections.show');
+        Route::get('/courses/{course_id}/sections/create', [SectionController::class, 'create'])->name('sections.create');
+        Route::post('/sections', [SectionController::class, 'store'])->name('sections.store');
+        
+        Route::delete('/sections/{id}', [SectionController::class, 'destroy'])->name('sections.destroy');
+        Route::get('/sections/{id}/edit', [SectionController::class, 'edit'])->name('sections.edit');
+        Route::put('/sections/{id}', [SectionController::class, 'update'])->name('sections.update');
+
 
 
 
 
     });
+
+    Route::get('/requests', [RequestController::class, 'showRequests'])->name('requests');
+    Route::get('/sections/{id}', [SectionController::class, 'show'])->name('sections.show');
+    Route::get('/send-request/{student_name}/{course_id}', [RequestController::class, 'sendRequest'])->name('send-request');
+    Route::get('/confirm-request/{request}', [RequestController::class, 'confirmRequest'])->name('confirm-request');
+    Route::get('/my-course', [StudentCourseController::class, 'myCourse'])->name('my-course');
+    Route::post('/sections/{section}/submit-answer', [StudentCourseController::class, 'submitAnswer'])->name('sections.submit-answer');
+
+
+
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

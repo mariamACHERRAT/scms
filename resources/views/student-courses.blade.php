@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,12 @@
 <body>
 
 <x-app-layout>    
+<div style="margin-top:20px;margin-left:86%;"><a href="{{ route('course.create') }}" class="focus:outline-none text-white bg-green-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-800">ADD COURSE</a>
+</div>
+
+
+
+
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     <!--Card 1-->
         @foreach($courses as $course)
@@ -36,6 +43,29 @@
      </a>
       @endforeach
 </div>
-</x-app-layout>
+    </x-app-layout>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

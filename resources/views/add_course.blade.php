@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="resources\css\app.css.css">
 </head>
 <body>
-<form class="mt-6 ... w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" action="{{ route('store') }}" method="post" enctype="multipart/form-data">
+<form class="mt-6 ... w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" action="{{ route('courses.store') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Title</label>

@@ -18,11 +18,10 @@
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-lg">
    
-    <form
-    action="{{ route('store') }}"
-      class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-    >
+  <form method="POST" action="{{ route('students.store') }}" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">>
     @csrf
+
+
       <p class="text-center text-lg font-medium">Add New Student</p>
 
       <div>

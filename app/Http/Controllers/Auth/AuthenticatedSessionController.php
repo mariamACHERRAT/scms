@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         if ($user->is_admin) {
             return redirect()->route('dashboard');
         } elseif ($user->is_prof) {
-            return redirect()->route('student_list');
+            return redirect()->route('teacher_list');
         } else {
             echo "here";
             return redirect()->route('student_list');

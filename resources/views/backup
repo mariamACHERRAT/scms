@@ -167,13 +167,13 @@ function addChoice(button) {
 
   var choiceInput = document.createElement("input");
   choiceInput.type = "text";
-  choiceInput.name = "choices_" + (questionsContainer.childElementCount -1) + "[choice][]";
+  choiceInput.name = "choices_" + (questionsContainer.childElementCount -1) + "[]";
   choiceInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
   choiceInput.placeholder = "Choice";
 
   var isCorrectCheckbox = document.createElement("input");
   isCorrectCheckbox.type = "checkbox";
-  isCorrectCheckbox.name = "choices_" + (questionsContainer.childElementCount - 1) + "[is_correct][]";; // Set a common name for all the radio inputs
+  isCorrectCheckbox.name = "choices_correct_" + (questionsContainer.childElementCount - 1) + "[]";; // Set a common name for all the radio inputs
   isCorrectCheckbox.className = "mr-2";
   isCorrectCheckbox.value = choicesContainer.childElementCount + 1; // Assign a unique value to each radio input
  

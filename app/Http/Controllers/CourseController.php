@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Course;
+use App\Models\Section;
 class CourseController extends Controller
 {
     /**
@@ -15,9 +16,11 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $user = Auth::user();
+        $courses = Course::where('user_id', $user->id)->get();
         return view('teacher_courses', compact('courses'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -69,12 +72,12 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $course = Course::findOrFail($id);
-    
-        return view('course_details', compact('course'));
-    }
+  public function show($id)
+{
+    $course = Course::with('sections')->findOrFail($id);
+    return view('course_details', compact('course'));
+}
+
     
 
     /**
@@ -142,6 +145,36 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // retrieve the course record
+        $course = Course::findOrFail($id);
+    
+        // delete the related sections
+        $course->sections()->delete();
+    
+        // delete the course record
+        $course->delete();
+    
+        // redirect to the courses index page
+        return redirect("/courses");
     }
+//publish
+public function publish(Course $course)
+{
+    $course->is_publick = true;
+    $course->save();
+
+    // Redirect or return a response as needed
+    return redirect()->back()->with('success', 'Course published successfully.');
+}
+
+
+
+
+//display courses 
+
+public function display()
+{
+    $courses = Course::where('is_publick', true)->get();
+    return view('cours', compact('courses'));
+}
 }
