@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<x-app-layout>   
 
   <form method="POST" action="{{ route('sections.store') }}"
     class="p-10 mt-10 mx-auto max-w-lg border-solid border-2 border-gray-400 " style="border-radius:10px;"
@@ -56,6 +57,12 @@
         <label class="block">Task Description</label>
         <textarea name="description"
           class="ckeditor"></textarea>
+          <div class="mb-4">
+                  <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image du produit</label>
+                 <input type="file" style="display: none;" id="imageInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" name="image">
+                 <img src="{{ asset('image/addfile.png') }}" style="border-radius:50%;width:70px;cursor:pointer;" alt="Course Image" onclick="document.getElementById('imageInput').click();">
+                     <p id="uploadStatus"></p>
+                </div>
       </div>
       
     </div>
@@ -71,8 +78,8 @@
     </div>
 
     <button type="submit"
-      class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Ajouter
-      la section</button>
+      class=" bg-fuchsia-700 text-white rounded-md px-4 py-2  focus:outline-none focus:ring-2 focus:ring-blue-500">Add
+       section</button>
   </form>
 
 
@@ -95,25 +102,25 @@
     }
 
     function showChoices(select) {
-  var choicesField = select.parentNode.getElementsByClassName("choicesField")[0];
-  var choicesContainer = choicesField.getElementsByClassName("choices-container")[0];
-  
-  if (select.value === "choices") {
-    choicesField.style.display = "block";
-    textAnswerInput.style.display = "none";
-    convertToCheckboxes(choicesContainer);
-  } else if (select.value === "one_choice") {
-    choicesField.style.display = "block";
-    textAnswerInput.style.display = "none";
-    convertToRadios(choicesContainer);
-  } else {
-    choicesField.style.display = "none";
-    textAnswerInput.style.display = "none";
-  }
-}
+    var choicesField = select.parentNode.getElementsByClassName("choicesField")[0];
+    var choicesContainer = choicesField.getElementsByClassName("choices-container")[0];
+    
+    if (select.value === "choices") {
+      choicesField.style.display = "block";
+      // convertToCheckboxes(choicesContainer);
+    } else if (select.value === "one_choice") {
+      choicesField.style.display = "block";
+      // convertToRadios(choicesContainer);
+    } else {
+      choicesField.style.display = "none";
+    }
+    }
 
 
 function convertToRadios(container, index) {
+  if (container) {
+
+
   // Remove existing choices
   container.innerHTML = "";
 
@@ -124,8 +131,10 @@ function convertToRadios(container, index) {
   container.appendChild(choiceInput1);
   container.appendChild(choiceInput2);
 }
+}
 
 function convertToCheckboxes(container, index) {
+  if (container) {
   // Remove existing choices
   container.innerHTML = "";
 
@@ -135,6 +144,7 @@ function convertToCheckboxes(container, index) {
 
   container.appendChild(choiceInput1);
   container.appendChild(choiceInput2);
+}
 }
 
 function createChoiceInput(type, name, label, checked) {
@@ -158,7 +168,7 @@ function createChoiceInput(type, name, label, checked) {
 }
 
 
-function addChoice(button) {
+function addChoice(button, index) {
   var choicesContainer = button.parentNode.getElementsByClassName("choices-container")[0];
   var questionsContainer = document.getElementsByClassName("questions-container")[0];
 
@@ -167,15 +177,15 @@ function addChoice(button) {
 
   var choiceInput = document.createElement("input");
   choiceInput.type = "text";
-  choiceInput.name = "choices_" + (questionsContainer.childElementCount -1) + "[choice][]";
+  choiceInput.name =  'questions[' + (index) + '][choices][]';
   choiceInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
   choiceInput.placeholder = "Choice";
 
   var isCorrectCheckbox = document.createElement("input");
   isCorrectCheckbox.type = "checkbox";
-  isCorrectCheckbox.name = "choices_" + (questionsContainer.childElementCount - 1) + "[is_correct][]";; // Set a common name for all the radio inputs
+  isCorrectCheckbox.name = 'questions[' + (index) + '][is_correct][]'; // Set a common name for all the radio inputs
   isCorrectCheckbox.className = "mr-2";
-  isCorrectCheckbox.value = choicesContainer.childElementCount + 1; // Assign a unique value to each radio input
+  isCorrectCheckbox.value = choicesContainer.childElementCount; // Assign a unique value to each radio input
  
   choiceDiv.appendChild(isCorrectCheckbox);
   choiceDiv.appendChild(choiceInput);
@@ -193,9 +203,9 @@ function addChoice(button) {
 
     function addQuestion() {
       var questionsContainer = document.getElementsByClassName("questions-container")[0];
-
+      var  questionCount = questionsContainer.childElementCount;
       var questionDiv = document.createElement("div");
-      questionDiv.className = "mb-4";
+      questionDiv.className = "mb-4 question-container";
 
       var questionLabel = document.createElement("label");
       questionLabel.className = "block";
@@ -203,12 +213,12 @@ function addChoice(button) {
 
       var questionInput = document.createElement("input");
       questionInput.type = "text";
-      questionInput.name = "questions[]";
+      questionInput.name =  'questions[' + (questionCount) + '][question]';
       questionInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
       questionInput.placeholder = "Question";
 
       var answerTypeSelect = document.createElement("select");
-      answerTypeSelect.name = "answer_types[]";
+      answerTypeSelect.name = 'questions[' + (questionCount) + '][answer_type]';
       answerTypeSelect.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
       answerTypeSelect.onchange = function () {
         showChoices(this);
@@ -230,14 +240,14 @@ function addChoice(button) {
       answerTypeSelect.appendChild(answerTypeTextOption);
       answerTypeSelect.appendChild(answerTypeChoicesOption);
 
-      var textAnswerInput = document.createElement("input");
-      textAnswerInput.type = "text";
-      textAnswerInput.name = "text_answers[]";
-      textAnswerInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
-      textAnswerInput.placeholder = "Text Answer";
-      textAnswerInput.style.display = "none";
-      textAnswerInput.classList.add("textAnswerInput");
-
+      // var textAnswerInput = document.createElement("input");
+      // textAnswerInput.type = "text";
+      // textAnswerInput.name = "text_answers[]";
+      // textAnswerInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
+      // textAnswerInput.placeholder = "Text Answer";
+      // textAnswerInput.style.display = "none";
+      // textAnswerInput.classList.add("textAnswerInput");
+      var index = questionCount
       var choicesField = document.createElement("div");
       choicesField.className = "choicesField";
       choicesField.style.display = "none";
@@ -247,15 +257,16 @@ function addChoice(button) {
       choicesLabel.innerHTML = "Choices";
 
       var choicesContainer = document.createElement("div");
-      choicesContainer.className = "choices-container";
+      choicesContainer.className = "choices-container" ;
 
       var addChoiceButton = document.createElement("button");
       addChoiceButton.type = "button";
       addChoiceButton.className = "bg-red-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500";
       addChoiceButton.innerHTML = "Add Choice";
-      addChoiceButton.dataset.choiceName = "choices_" + (questionsContainer.childElementCount) + "[]";
-      addChoiceButton.onclick = function () {
-        addChoice(this);
+      addChoiceButton.dataset.choiceName = "choices_" + (questionCount) + "[]";
+      addChoiceButton.onclick = function() {
+        console.log(index)
+        addChoice(this, index);
       };
 
       choicesField.appendChild(choicesLabel);
@@ -265,7 +276,7 @@ function addChoice(button) {
       questionDiv.appendChild(questionLabel);
       questionDiv.appendChild(questionInput);
       questionDiv.appendChild(answerTypeSelect);
-      questionDiv.appendChild(textAnswerInput);
+      // questionDiv.appendChild(textAnswerInput);
       questionDiv.appendChild(choicesField);
 
       questionsContainer.appendChild(questionDiv);
@@ -281,7 +292,7 @@ function addChoice(button) {
     });
   </script>
 
-
+</x-app-layout>
 </body>
 
 </html>

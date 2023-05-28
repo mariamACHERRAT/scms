@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Request;
+use App\Models\User;
 use Auth;
 
 
@@ -24,22 +25,5 @@ class StudentCourseController extends Controller
     return view('student-courses', compact('courses'));
 }
    
-public function submitAnswer(HttpRequest $request, $sectionId)
-{
-    $section = Section::findOrFail($sectionId);
-    
-    // Validate the form data if needed
-    $request->validate([
-        'content' => 'required',
-    ]);
-
-    // Save the answer to the section
-    $section->answers()->create([
-        'content' => $request->input('content'),
-        'user_id' => Auth::user()->id,
-    ]);
-
-    return redirect()->back()->with('success', 'Your answer has been submitted successfully.');
-}
 
 }

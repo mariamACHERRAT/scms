@@ -20,7 +20,7 @@
 <x-app-layout>
 <?php $user =Auth::user()?>
 @if ($user->is_prof)
-  <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-green-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-800">Publish</a></div>
+  <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-fuchsia-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Publish</a></div>
   @endif  
   <div class="pt-6 bg-gray-50">
     <div id="card" class="">
@@ -30,7 +30,7 @@
         <div v-for="card in cards" class="flex flex-col md:flex-row overflow-hidden bg-white shadow-xl mt-4 w-100 mx-2">
           <!-- media -->
           <div class="h-64 w-auto md:w-1/2">
-            <img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('images/' . $course->image) }}" />
+            <img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('images/' . $course->image) }}" style="height:300px"/>
           </div>
           <!-- content -->
           <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
@@ -58,11 +58,11 @@
             </p>
             <p class="text-sm text-green-800 uppercase tracking-wide font-semibold mt-2">
               SKILLS LEARNED FROM THE LESSON
-            </p>
+            </p><br></br>
             <div class="flex items-center">
-              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills }}</span>
-              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills }}</span>
-              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills }}</span>
+              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span>
+              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span>
+              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span>
             </div>
             <?php $user =Auth::user()?>
             @if ($user->is_prof)

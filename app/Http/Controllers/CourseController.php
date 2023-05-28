@@ -177,4 +177,19 @@ public function display()
     $courses = Course::where('is_publick', true)->get();
     return view('cours', compact('courses'));
 }
+
+
+public function viewAnswers($sectionId)
+    {
+        $section = Section::findOrFail($sectionId);
+        
+        // Check if the logged-in user is the professor who created the section
+        if ($section->course->professor_id !== Auth::user()->id) {
+            abort(403, 'Unauthorized');
+        }
+        
+        $answers = $section->answers;
+        
+        return view('professor-view-answers', compact('section', 'answers'));
+    }
 }

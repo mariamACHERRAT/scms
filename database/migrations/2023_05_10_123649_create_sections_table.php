@@ -12,10 +12,12 @@ class CreateSectionsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('small_title')->nullable();
+            $table->text('section_file')->nullable();
             $table->enum('type', ['video', 'text', 'test', 'task']);
             $table->string('video_link')->nullable();
             $table->text('description')->nullable();
             $table->text('content')->nullable();
+            $table->text('students_answers')->nullable();
             $table->unsignedInteger('course_id')->nullable();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->timestamps();

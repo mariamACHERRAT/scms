@@ -9,7 +9,7 @@
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-  
+<x-app-layout>
 <form method="POST" action="{{ route('sections.update', $section->id) }}" class="p-10 mt-10 mx-auto max-w-lg border-solid border-2 border-gray-400 " style="border-radius:10px;" enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -20,10 +20,12 @@
 
     <div class="mb-4">
         <input type="hidden" name="type" value="{{ $section->type }}">
-        @if($section->type == 'text')
+        @if($section->type == "text")
+
             <div id="contentField" class="mb-4">
+               
                 <label for="content" class="block font-medium mb-2">Contenu *</label>
-                <textarea name="content" id="editor"  class="ckeditor border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $section->content }}</textarea>
+                <textarea name="content" id="editor"  class="ckeditor border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">{!! $section->content !!}</textarea>
             </div>
         @elseif($section->type == 'video')
             <div id="videoField" class="mb-4">
@@ -33,36 +35,26 @@
         @elseif($section->type == 'task')
             <div id="taskField" class="mb-4">
                 <label for="task_description" class="block font-medium mb-2">Description de la tâche</label>
-                <textarea name="description"  class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $section->description }}</textarea>
+                <textarea name="description"  class="ckeditor border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $section->description }}</textarea>
                 <!-- ajouter ici les champs pour la tâche, par exemple une date d'échéance -->
             </div>
         @endif
     </div>
-    <script>
-    function showContent(value) {
-        document.getElementById("contentField").style.display = "none";
-        document.getElementById("videoField").style.display = "none";
-        document.getElementById("taskField").style.display = "none";
+  
 
-        if (value == "text") {
-            document.getElementById("contentField").style.display = "block";
-            document.getElementById("video_link").value = "";
-            document.getElementById("description").value = "";
-        } else if (value == "video") {
-            document.getElementById("videoField").style.display = "block";
-            document.getElementById("editor").value = "";
-            document.getElementById("description").value = "";
-        } else if (value == "task") {
-            document.getElementById("taskField").style.display = "block";
-            document.getElementById("editor").value = "";
-            document.getElementById("video_link").value = "";
-        }
-    }
+    <button type="submit" class="bg-fuchsia-700 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none">Update</button>
+    </x-app-layout>
+</form>
 
-    // Set initial state of the form based on the section type
-    var sectionType = "{{ $section->type }}";
-    showContent(sectionType);
+
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+
+        // Check if the student has sent the answer
+      
+    });
 </script>
-
-
-    <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none">Update</button>
+</body>
+</html>

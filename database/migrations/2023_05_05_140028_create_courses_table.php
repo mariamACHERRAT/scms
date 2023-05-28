@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
+            
+
             $table->string('title');
             $table->boolean('is_publick')->default(false);
             $table->string('image')->nullable();

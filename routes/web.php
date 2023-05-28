@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\StudentCourseController;
+use App\Http\Controllers\TaskAnswerController;
 
 use App\Http\Middleware\CheckRoles;
 /*
@@ -61,7 +62,6 @@ Route::middleware('auth')->group(function () {
         Route::get("/student",[StudentController::class,"student_list"])->name("student_list");
         Route::get("/student/create",[StudentController::class,"create"])->name("student.create");
         Route::post("/students", [StudentController::class, "store"])->name("students.store");
-
         Route::get('/students/{id}/edit',[StudentController::class,"edit"])->name('students.edit');
         Route::put('/students/{id}',[StudentController::class,"update"])->name('students.update');
         Route::delete('/students/{id}',[StudentController::class,"destroy"])->name('students.destroy');
@@ -75,6 +75,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/teachers/{id}',[TeacherController::class,"update"])->name('teachers.update');
         Route::delete('/teachers/{id}',[TeacherController::class,"destroy"])->name('teachers.destroy');
 
+
+
     });
 
     Route::middleware('role:is_prof')->group(function () {
@@ -86,25 +88,26 @@ Route::middleware('auth')->group(function () {
         Route::put('/courses/{id}',[CourseController::class,"update"])->name('courses.update');
         Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
        Route::get('/courses/{course}/publish',[CourseController::class, 'publish'])->name('publish-course');
+       Route::post('/task-answers/{taskAnswerId}/send-score', [TaskAnswerController::class, 'sendScore'])->name('send-score');
 
+    //    Route::get('/sections/{section}/view-answers', [TaskAnswerController::class, 'viewAnswers'])->name('sections.view-answers');
 
-
-        
 
         //section
         Route::get('/add-section', function () {
             return view('add-section');
         })->name("add.section");
         Route::get('/sections', [SectionController::class, 'index'])->name('sections.index');
-
         Route::get('/sections/create', [SectionController::class, 'create'])->name('sections.create');
         Route::get('/courses/{course_id}/sections/create', [SectionController::class, 'create'])->name('sections.create');
         Route::post('/sections', [SectionController::class, 'store'])->name('sections.store');
-        
         Route::delete('/sections/{id}', [SectionController::class, 'destroy'])->name('sections.destroy');
         Route::get('/sections/{id}/edit', [SectionController::class, 'edit'])->name('sections.edit');
         Route::put('/sections/{id}', [SectionController::class, 'update'])->name('sections.update');
 
+
+        //tasks answers
+        Route::get('/task-answers/{sectionId}', [TaskAnswerController::class, 'showTaskAnswers'])->name('task-answers');
 
 
 
@@ -115,8 +118,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/sections/{id}', [SectionController::class, 'show'])->name('sections.show');
     Route::get('/send-request/{student_name}/{course_id}', [RequestController::class, 'sendRequest'])->name('send-request');
     Route::get('/confirm-request/{request}', [RequestController::class, 'confirmRequest'])->name('confirm-request');
-    Route::get('/my-course', [StudentCourseController::class, 'myCourse'])->name('my-course');
-    Route::post('/sections/{section}/submit-answer', [StudentCourseController::class, 'submitAnswer'])->name('sections.submit-answer');
+    Route::get('/my-course',[StudentCourseController::class, 'myCourse'] )->name('my-course');
+    
+    Route::post('/send-task-answer/{userName}/{sectionId}', [TaskAnswerController::class, 'sendTaskAnswer'])->name('send-task-answer');
+    Route::get('/task-answers/student/{sectionId}', [TaskAnswerController::class, 'showTaskAnswersForStudent'])->name('task-answers.student');
 
 
 

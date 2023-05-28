@@ -1,0 +1,376 @@
+https://github.com/btahir/next-shopify-starter/blob/main/components/CartTable.js
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <form method="POST" action="{{ route('sections.store') }}"
+    class="p-10 mt-10 mx-auto max-w-lg border-solid border-2 border-gray-400 " style="border-radius:10px;"
+    enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="id" value="{{$id}}">
+    <div class="mb-4">
+      <label for="title" class="block font-medium mb-2">Titre de la section</label>
+      <input type="text" name="title" required
+        class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="mb-4">
+      <label class="block">Content Type</label>
+      <select name="type" onchange="showContent(this.value)"
+        class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        <option value="">Select a content type</option>
+        <option value="text">Text</option>
+        <option value="video">Video</option>
+        <option value="task">Task</option>
+        <option value="test">Test</option>
+      </select>
+    </div>
+
+    <div id="contentField" style="display: none;">
+      <div class="mb-4">
+        <label class="block">Content</label>
+        <textarea name="content" class="ckeditor"></textarea>
+      </div>
+    </div>
+
+    <div id="videoField" style="display: none;">
+      <div class="mb-4">
+        <label class="block">Video URL</label>
+        <input type="text" name="video_url"
+          class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+    </div>
+
+    <div id="taskField" style="display: none;">
+      <div class="mb-4">
+        <label class="block">Task Description</label>
+        <textarea name="task_description"
+          class="ckeditor"></textarea>
+      </div>
+      <div class="mb-4">
+        <label class="block">Due Date</label>
+        <input type="date" name="due_date"
+          class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+    </div>
+
+    <div id="testField" style="display: none;" class="mb-4">
+      <div class="questions-container">
+      </div>
+
+      <button type="button" onclick="addQuestion()"
+        class="bg-red-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Add
+        Question</button>
+
+    </div>
+
+    <button type="submit"
+      class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Ajouter
+      la section</button>
+  </form>
+
+
+  <script>
+    function showContent(value) {
+      document.getElementById("contentField").style.display = "none";
+      document.getElementById("videoField").style.display = "none";
+      document.getElementById("taskField").style.display = "none";
+      document.getElementById("testField").style.display = "none";
+
+      if (value === "text") {
+        document.getElementById("contentField").style.display = "block";
+      } else if (value === "video") {
+        document.getElementById("videoField").style.display = "block";
+      } else if (value === "task") {
+        document.getElementById("taskField").style.display = "block";
+      } else if (value === "test") {
+        document.getElementById("testField").style.display = "block";
+      }
+    }
+
+    function showChoices(select) {
+  var choicesField = select.parentNode.getElementsByClassName("choicesField")[0];
+  var textAnswerInput = select.parentNode.getElementsByClassName("textAnswerInput")[0];
+
+  if (select.value === "choices") {
+    choicesField.style.display = "block";
+    textAnswerInput.style.display = "none";
+  } else if (select.value === "text") {
+    choicesField.style.display = "none";
+    textAnswerInput.style.display = "block";
+  } else {
+    choicesField.style.display = "none";
+    textAnswerInput.style.display = "none";
+  }
+}
+
+
+
+
+
+
+
+    function addChoice(button) {
+      var choicesContainer = button.parentNode.getElementsByClassName("choices-container")[0];
+
+      var choiceDiv = document.createElement("div");
+      choiceDiv.className = "mb-2";
+
+      var choiceInput = document.createElement("input");
+      choiceInput.type = "text";
+      choiceInput.name = button.dataset.choiceName;
+      choiceInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
+      choiceInput.placeholder = "Choice";
+
+      var isCorrectCheckbox = document.createElement("input");
+      isCorrectCheckbox.type = "checkbox";
+      isCorrectCheckbox.name = "correct_answers[]";
+      isCorrectCheckbox.className = "mr-2";
+
+      choiceDiv.appendChild(isCorrectCheckbox);
+      choiceDiv.appendChild(choiceInput);
+
+      choicesContainer.appendChild(choiceDiv);
+    }
+
+    function addQuestion() {
+  var questionsContainer = document.getElementsByClassName("questions-container")[0];
+
+  var questionDiv = document.createElement("div");
+  questionDiv.className = "mb-4";
+
+  var questionLabel = document.createElement("label");
+  questionLabel.className = "block";
+  questionLabel.innerHTML = "Question";
+
+  var questionInput = document.createElement("input");
+  questionInput.type = "text";
+  questionInput.name = "questions[]";
+  questionInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
+  questionInput.placeholder = "Question";
+
+  var answerTypeSelect = document.createElement("select");
+  answerTypeSelect.name = "answer_types[]";
+  answerTypeSelect.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
+  answerTypeSelect.onchange = function () {
+    showChoices(this);
+  };
+
+  var answerTypeDefaultOption = document.createElement("option");
+  answerTypeDefaultOption.value = "";
+  answerTypeDefaultOption.innerHTML = "Select an answer type";
+
+  var answerTypeTextOption = document.createElement("option");
+  answerTypeTextOption.value = "text";
+  answerTypeTextOption.innerHTML = "Text";
+
+  var answerTypeChoicesOption = document.createElement("option");
+  answerTypeChoicesOption.value = "choices";
+  answerTypeChoicesOption.innerHTML = "Multiple Choices";
+
+  answerTypeSelect.appendChild(answerTypeDefaultOption);
+  answerTypeSelect.appendChild(answerTypeTextOption);
+  answerTypeSelect.appendChild(answerTypeChoicesOption);
+
+  var textAnswerInput = document.createElement("input");
+  textAnswerInput.type = "text";
+  textAnswerInput.name = "text_answers[]";
+  textAnswerInput.className = "border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
+  textAnswerInput.placeholder = "Text Answer";
+  textAnswerInput.style.display = "none";
+  textAnswerInput.classList.add("textAnswerInput");
+
+  var choicesField = document.createElement("div");
+  choicesField.className = "choicesField";
+  choicesField.style.display = "none";
+
+  var choicesLabel = document.createElement("label");
+  choicesLabel.className = "block";
+  choicesLabel.innerHTML = "Choices";
+
+  var choicesContainer = document.createElement("div");
+  choicesContainer.className = "choices-container";
+
+  var addChoiceButton = document.createElement("button");
+  addChoiceButton.type = "button";
+  addChoiceButton.className = "bg-red-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500";
+  addChoiceButton.innerHTML = "Add Choice";
+  addChoiceButton.dataset.choiceName = "choices_" + (questionsContainer.childElementCount + 1) + "[]";
+  addChoiceButton.onclick = function () {
+    addChoice(this);
+  };
+
+  choicesField.appendChild(choicesLabel);
+  choicesField.appendChild(choicesContainer);
+  choicesField.appendChild(addChoiceButton);
+
+  questionDiv.appendChild(questionLabel);
+  questionDiv.appendChild(questionInput);
+  questionDiv.appendChild(answerTypeSelect);
+  questionDiv.appendChild(textAnswerInput);
+  questionDiv.appendChild(choicesField);
+
+  questionsContainer.appendChild(questionDiv);
+}
+
+  </script>
+
+
+  <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.ckeditor').ckeditor();
+    });
+  </script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useEffect, useState } from "react";
+import axios from "../../../axios";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import Header from "../../header/Header";
+import { Link } from "react-router-dom"
+import "./wedding.css";
+
+function Wedding({ category }) {
+  const [products, setProducts] = useState([]);
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get(`/api/products/${category}`);
+        setProducts(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchProducts();
+  }, [category]);
+
+  async function handleFavoriteToggle(productId, isFavorite) {
+    try {
+      const response = await axios.post(`/api/products/${productId}/favorite`, {
+        isFavorite,
+      });
+      const updatedProducts = products.map((product) => {
+        if (product.id === productId) {
+          return {
+            ...product,
+            is_favoris: response.data.favorite,
+          };
+        }
+        return product;
+      });
+      setProducts(updatedProducts);
+
+      if (response.data.favorite) {
+        const favoriteProduct = products.find(
+          (product) => product.id === productId
+        );
+        setFavoriteProducts([...favoriteProducts, favoriteProduct]);
+      } else {
+        const updatedFavoriteProducts = favoriteProducts.filter(
+          (product) => product.id !== productId
+        );
+        setFavoriteProducts(updatedFavoriteProducts);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const addToCart = async (productId) => {
+    try {
+      const response = await axios.post(`/api/cart/add/${productId}`);
+      console.log(response.data.message); // Success message from the API
+      // Perform any additional actions after adding to the cart
+    } catch (error) {
+      console.error(error);
+      // Handle error cases
+    }
+  };
+
+  return (
+    <>
+      <div className="product_contenair">
+        <div className="header-container">
+          <Header />
+        </div>
+
+        
+          {products.map((product) => (
+            <div className="child_container">
+            <Link to={`/products/${product.id}`} key={product.id}>
+              
+            <div className="card-p" >
+              <div
+                className="favorite-icon"
+                onClick={() =>
+                  handleFavoriteToggle(product.id, !product.is_favoris)
+                }
+              >
+                {product.is_favoris ? (
+                  <FaHeart className="heart-icon" style={{ color: "red" }} />
+                ) : (
+                  <FaRegHeart className="heart-icon" />
+                )}
+              </div>
+
+              <img
+                src={`http://127.0.0.1:8000/images/${product.image}`}
+                className="p_img"
+                alt={product.name}
+              />
+              <h2 className="p_n">{product.name}</h2>
+              <h3 className="p_d">{product.description}</h3>
+              <h3 className="p_p">
+                <strong>{product.price}$</strong>
+              </h3>
+              <button onClick={() => addToCart(product.id)}>ADD TO CART</button>
+            </div>
+            </Link>
+            </div>
+          ))}
+     
+      </div>
+    </>
+  );
+}
+
+export default Wedding;
+

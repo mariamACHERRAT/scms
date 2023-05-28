@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
-
+use App\Models\TaskAnswer;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,9 @@ class Section extends Model
         'description',
         'content',
         'course_id',
+        'students_answers'
+        ,"section_file"
+        
     ];
 
     protected $casts = [
@@ -27,5 +31,9 @@ class Section extends Model
     {
         return $this->hasMany(Question::class);
     }
+    public function taskAnswers()
+{
+    return $this->hasMany(TaskAnswer::class);
+}
  
 }

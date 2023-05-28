@@ -3,7 +3,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Section;
+use App\Models\TaskAnswer;
 use App\Models\Question;
+use Auth;
+
 use App\Models\Choice;
 
 
@@ -24,6 +27,7 @@ class SectionController extends Controller
 
 public function store(Request $request)
 {
+    // dd($request);
     
     $section = new Section;
     $section->title = $request->title;
@@ -33,31 +37,35 @@ public function store(Request $request)
     $section->video_link = $request->video_link ?? null;
     $section->description = $request->description ?? null;
     $section->course_id = $request->id;
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('images'), $fileName);
+        $section->section_file = $fileName;
+    }
     $section->save();
 
     if ($request->type === 'test') {
         $questions = $request->input('questions');
-        $answerTypes = $request->input('answer_types');
-        $textAnswers = $request->input('text_answers');
     
         foreach ($questions as $index => $question) {
-            $answerType = $answerTypes[$index];
             
             // Check if the question is not empty
             if (!empty($question)) {
                 $newQuestion = new Question;
-                $newQuestion->question = $question;
-                $newQuestion->answer_type = $answerType;
-                $newQuestion->section_id = $section->id;
+                $newQuestion->question = $question["question"];
+                $newQuestion->answer_type = $question["answer_type"];
+                $newQuestion->section_id = $section["id"];
                 $newQuestion->save();
                
-                if (isset($request["choices_".$index+1])) { // Check if choices exist for the current question
-                    $qchoices = $request["choices_".$index+1];
+                if (isset($question["choices"])) { // Check if choices exist for the current question
+                    $qchoices = $question["choices"];
+                    $correct = $question["is_correct"];
                     foreach ($qchoices as $key => $value) {
                         $choice = new Choice; // Create a new Choice instance
                         $choice->question_id = $newQuestion->id;
-                        $choice->choice = $value["choice"];
-                        $choice->is_correct = $value["is_correct"];
+                        $choice->choice = $value;
+                        $choice->is_correct = in_array($key, $correct);
                         $choice->save();
                     }
                 }
@@ -81,7 +89,11 @@ public function store(Request $request)
 {
     $section = Section::findOrFail($id); // renvoie une erreur 404 si aucune section avec cet ID n'est trouvée
     
-    return view('show_section', compact('section')); // utilisez le nom de variable singulier pour correspondre à la vue
+    $taskAnswer = TaskAnswer::where('section_id', $section->id)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+    
+        return view('show_section', compact('section', 'taskAnswer')); // utilisez le nom de variable singulier pour correspondre à la vue
 }
 
 public function destroy($id)
@@ -90,7 +102,7 @@ public function destroy($id)
     
     $section->delete(); // supprime la section de la base de données
     
-    return redirect('/courses')->with('success', 'La section a été supprimée avec succès.');
+    return redirect('/courses');
 }
 
 
@@ -127,14 +139,13 @@ public function update(Request $request, $id)
         $section->content = null;
         $section->video_link = null;
         $section->description = $validatedData['description'];
+
     }
 
     $section->save();
 
-    return redirect()->route('sections');
+    return redirect('/sections/'.$section->id);
 }
-
-
 
 
 
