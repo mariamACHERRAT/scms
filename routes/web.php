@@ -10,7 +10,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\TaskAnswerController;
-
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\CheckRoles;
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +23,8 @@ use App\Http\Middleware\CheckRoles;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/cours', [CourseController::class, 'display'])->name('cours');
 Route::get('/courses/{id}', [CourseController::class, 'show'])->name('course.show');
 
