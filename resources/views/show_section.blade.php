@@ -25,7 +25,7 @@
     @if ($section->type === 'test')
     <!-- Display the content of the test -->
     <?php $user =Auth::user()?>
-    @if ($user->is_prof)
+    @if ($user->is_etudiant)
     <h4 class="text-fuchsia-500">Test Content</h4>
     <!-- Add your code here to display the content of the test -->
     <!-- For example, you can iterate over the questions and choices and display them -->
@@ -44,16 +44,28 @@
         <hr>
     @endforeach
     <button type="submit"   class="inline-block bg-fuchsia-600  focus:outline-none focus:ring-4 text-white font-medium rounded-lg text-sm px-5 py-2.5 mt-2 " >Submit</button>
-</form>
+    </form> 
+    @endif
 
 
+@if ($user->is_prof)
+    <h4 class="text-fuchsia-500">Your Test Content</h4>
+    @foreach ($section->questions as $question)
+        <p style="font-size:18px;margin-top:10px;margin-bottom:10px">{{ $question->question }}</p>
+        <div class="flex">
+            @foreach ($question->choices as $choice)
+                <div class="mr-4">
+                    <input type="checkbox" id="{{ $choice->id }}" name="answers[{{ $question->id }}][]" value="{{ $choice->id }}" {{ $choice->is_correct ? 'checked' : '' }}>
+                    <label for="{{ $choice->id }}">{{ $choice->choice }}</label>
+                </div>
+            @endforeach
+        </div>
+        <hr>
+    @endforeach
 @endif
-
     @endif
 
-    @if(session('score'))
-    <p>Score: {{ session('score') }}/20</p>
-    @endif
+    
 
 
 

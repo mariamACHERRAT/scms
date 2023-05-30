@@ -126,6 +126,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/send-task-answer/{userName}/{sectionId}', [TaskAnswerController::class, 'sendTaskAnswer'])->name('send-task-answer');
     Route::get('/task-answers/student/{sectionId}', [TaskAnswerController::class, 'showTaskAnswersForStudent'])->name('task-answers.student');
     Route::post('/tests/submit/{section}',  [TestAnswerController::class, 'submit'])->name('tests.submit');
+    Route::get('/tests/result/{section}/{result}', [TestAnswerController::class, 'showresult'])->name('tests.result');
 
 
 
