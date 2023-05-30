@@ -17,8 +17,31 @@
 <x-app-layout>
 
 <div class="h-screen" style="margin-top:40px;margin-left:18%">
-    <div class="bg-white shadow-gray-500 rounded p-4" style="max-width: 80%;min-width:60%;margin-top:1px">
 
+    <div class="bg-white shadow-gray-500 rounded p-4" style="max-width: 80%;min-width:60%;margin-top:1px">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{ $section->title }}</h5>
+
+    @if ($section->type === 'test')
+    <!-- Display the content of the test -->
+    <h4 class="text-red-500">Test Content</h4>
+    <!-- Add your code here to display the content of the test -->
+    <!-- For example, you can iterate over the questions and choices and display them -->
+    <form>
+    @foreach ($section->questions as $question)
+            <p>{{ $question->question }}</p>
+            <div class="flex">
+                @foreach ($question->choices as $choice)
+                    <div class="mr-4">
+                        <input type="checkbox" id="{{ $choice->id }}" name="{{ $question->id }}[]" value="{{ $choice->id }}">
+                        <label for="{{ $choice->id }}">{{ $choice->choice }}</label>
+                    </div>
+                @endforeach
+            </div>
+            <hr>
+        @endforeach
+        <button type="submit">Submit</button>
+    </form>
+    @endif
         @if ($section->type === 'task')
             <div id="taskField" class="mb-4">
                 <?php $user =Auth::user()?>
@@ -30,7 +53,6 @@
                 @endif   
             @endif
 
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{ $section->title }}</h5>
 
             <div id="contentFields">
                 @if ($section->type === 'text')

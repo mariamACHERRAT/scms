@@ -17,16 +17,44 @@
 
       html {
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  background-image: url("image/header.png");
+ 
   background-size: cover;
   background-position: center;
 }
+body{
+  margin:0;
+  padding: 0;
+  
+}
+.courses-container {
+        display: flex; /* Use flexbox to align the courses in the same line */
+        justify-content: center; /* Center the courses horizontally */
+        gap: 20px; /* Add some space between the courses */
+        flex-wrap: wrap; /* Wrap the courses to the next line if necessary */
+        margin-top: 20px; /* Add margin to separate from the main content */
+      }
+#container {
+        background-image: url("image/header.png");
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .course-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* Limit the description to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+      }
 
     </style>
   </head>
 
-  <body class="leading-normal tracking-normal text-indigo-400 m-6 bg-cover bg-fixed" style="background-image: url('header.png');">
-    <div class="h-full">
+  <body class="leading-normal tracking-normal text-indigo-400 ">
+    <div class="h-full" id="container">
       <!--Nav-->
       <div class="w-full container mx-auto">
         <div class="w-full flex items-center justify-between">
@@ -35,6 +63,10 @@
           </a>
        
           <div class="flex w-1/2 justify-end content-center">
+          <a href="{{ route('home') }}" class="inline-block no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out">Home</a>
+        
+          <a  href="{{ route('aboutus') }}"  class="inline-block no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out">About</a>
+
           @if (Route::has('login'))
                
                     @auth
@@ -52,6 +84,7 @@
             <img class="fill-current h-6" src="{{ asset('image/instagram.png') }}" href="https://www.instagram.com/scmc_tetouan/"/>
 
         </a>
+
             <a
               class="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
               href="https://web.facebook.com/profile.php?id=100054450282737"
@@ -123,28 +156,40 @@
 
 
 
-    @foreach ($latestCourses as $course)
-    <a href="{{ route('course.show', $course->id) }}">
-        <div class="rounded overflow-hidden shadow-lg flex flex-wrap items-start" style=" background-color: white; max-width: 300px; border-radius: 11px; min-height: 500px;">
-            <img class="w-full" src="{{ asset('images/' . $course->image) }}" style="max-height: 200px; min-height: 200px;" alt="Mountain">
-            <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2" style="text-align: center;">{{ $course->title }}</div>
-                <h5 class="text-green-800">Content</h5>
-                <p class="text-gray-600 text-base">
-                    {{ $course->content}}
-                </p>
-            </div>
-            <h6 class="text-green-800 text-xs" style="margin-left: 17px">
-                SKILLS LEARNED FROM THE LESSON
-            </h6>
-            <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills}}</span>
-                <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills}}</span>
-                <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills}}</span>
-                
-            </div>
-        </div>
-    </a>
-    @endforeach
+
+
+
+
+<h1 style="font-size: 30px;margin-left:2%;margin-top:0px">Our latest programs</h1>
+    <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+    <!--Card 1-->
+        @foreach($latestCourses as $course)
+        <a href="{{ route('aboutcourse', $course->id) }}">
+
+    <div class="rounded overflow-hidden shadow-lg" style=" background-color: white;max-width: 300px; border-radius: 11px;min-height: 500px;">
+      <img class="w-full " src="{{ asset('images/' . $course->image) }}" style="max-height: 200px;min-height: 200px;" alt="Mountain">
+      <div class="px-6 py-4">
+        <div class="text-xl text-black mb-2" style="text-align: center;"> {{ $course->title }}</div>
+        <h5 class="text-green-800" >Content</h5>
+        <div class="course-description">
+        <p class="text-gray-600 text-base">
+         {{ $course->content}}
+         </h4>
+          </div>
+      </div>
+      <h6 class="text-green-800 text-xs" style="margin-left: 17px">
+          SKILLS LEARNED FROM THE LESSON
+</h6>
+      <div class="px-6 pt-4 pb-2">
+        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2"> {{ $course->skills}}</span>
+        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2"> {{ $course->skills}}</span>
+        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2"> {{ $course->skills}}</span>
+      </div>
+    </div>
+          </a>
+    
+   
+      @endforeach
+</div>
   </body>
 </html>

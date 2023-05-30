@@ -24,6 +24,9 @@ use App\Http\Middleware\CheckRoles;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('aboutus');
+Route::get('/aboutCourse/{id}', [HomeController::class, 'show'])->name('aboutcourse');
+
 
 Route::get('/cours', [CourseController::class, 'display'])->name('cours');
 Route::get('/courses/{id}', [CourseController::class, 'show'])->name('course.show');
