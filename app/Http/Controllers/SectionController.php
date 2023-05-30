@@ -84,7 +84,6 @@ public function store(Request $request)
 
 
 
-
     public function show($id)
 {
     $section = Section::findOrFail($id); // renvoie une erreur 404 si aucune section avec cet ID n'est trouvée

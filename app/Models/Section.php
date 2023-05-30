@@ -18,7 +18,8 @@ class Section extends Model
         'content',
         'course_id',
         'students_answers'
-        ,"section_file"
+        ,"section_file",
+       "score" 
         
     ];
 

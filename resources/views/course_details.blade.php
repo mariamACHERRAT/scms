@@ -20,7 +20,7 @@
 <x-app-layout>
 <?php $user =Auth::user()?>
 @if ($user->is_prof)
-  <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-fuchsia-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Publish</a></div>
+  <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-fuchsia-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " >Publish</a></div>
   @endif  
   <div class="pt-6 bg-gray-50">
     <div id="card" class="">

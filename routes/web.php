@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\TaskAnswerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\CheckRoles;
+use App\Http\Controllers\TestAnswerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -121,9 +123,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/send-request/{student_name}/{course_id}', [RequestController::class, 'sendRequest'])->name('send-request');
     Route::get('/confirm-request/{request}', [RequestController::class, 'confirmRequest'])->name('confirm-request');
     Route::get('/my-course',[StudentCourseController::class, 'myCourse'] )->name('my-course');
-    
     Route::post('/send-task-answer/{userName}/{sectionId}', [TaskAnswerController::class, 'sendTaskAnswer'])->name('send-task-answer');
     Route::get('/task-answers/student/{sectionId}', [TaskAnswerController::class, 'showTaskAnswersForStudent'])->name('task-answers.student');
+    Route::post('/tests/submit/{section}',  [TestAnswerController::class, 'submit'])->name('tests.submit');
+
 
 
 

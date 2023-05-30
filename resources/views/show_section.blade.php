@@ -21,27 +21,50 @@
     <div class="bg-white shadow-gray-500 rounded p-4" style="max-width: 80%;min-width:60%;margin-top:1px">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{ $section->title }}</h5>
 
+   
     @if ($section->type === 'test')
     <!-- Display the content of the test -->
-    <h4 class="text-red-500">Test Content</h4>
+    <?php $user =Auth::user()?>
+    @if ($user->is_prof)
+    <h4 class="text-fuchsia-500">Test Content</h4>
     <!-- Add your code here to display the content of the test -->
     <!-- For example, you can iterate over the questions and choices and display them -->
-    <form>
+    <form method="post" action="{{ route('tests.submit', $section) }}">
+    @csrf
     @foreach ($section->questions as $question)
-            <p>{{ $question->question }}</p>
-            <div class="flex">
-                @foreach ($question->choices as $choice)
-                    <div class="mr-4">
-                        <input type="checkbox" id="{{ $choice->id }}" name="{{ $question->id }}[]" value="{{ $choice->id }}">
-                        <label for="{{ $choice->id }}">{{ $choice->choice }}</label>
-                    </div>
-                @endforeach
-            </div>
-            <hr>
-        @endforeach
-        <button type="submit">Submit</button>
-    </form>
+        <p style="font-size:18px;margin-top:10px;margin-bottom:10px">{{ $question->question }}</p>
+        <div class="flex">
+            @foreach ($question->choices as $choice)
+                <div class="mr-4">
+                    <input type="checkbox" id="{{ $choice->id }}" name="answers[{{ $question->id }}][]" value="{{ $choice->id }}">
+                    <label for="{{ $choice->id }}">{{ $choice->choice }}</label>
+                </div>
+            @endforeach
+        </div>
+        <hr>
+    @endforeach
+    <button type="submit"   class="inline-block bg-fuchsia-600  focus:outline-none focus:ring-4 text-white font-medium rounded-lg text-sm px-5 py-2.5 mt-2 " >Submit</button>
+</form>
+
+
+@endif
+
     @endif
+
+    @if(session('score'))
+    <p>Score: {{ session('score') }}/20</p>
+    @endif
+
+
+
+
+
+
+
+
+    
+
+
         @if ($section->type === 'task')
             <div id="taskField" class="mb-4">
                 <?php $user =Auth::user()?>

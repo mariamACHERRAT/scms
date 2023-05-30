@@ -11,7 +11,8 @@
 <body>
 
 <x-app-layout>    
-<div style="margin-top:20px;margin-left:86%;"><a href="{{ route('course.create') }}" class="focus:outline-none text-white bg-fuchsia-700  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">ADD COURSE</a>
+
+<div style="margin-top:20px;margin-left:86%;"><a href="{{ route('course.create') }}" class="focus:outline-none text-white bg-fuchsia-700  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " >ADD COURSE</a>
 </div>
 
 
@@ -44,6 +45,11 @@
       @endforeach
 </div>
     </x-app-layout>
+
+
+
+    
+
 </body>
 </html>
 
