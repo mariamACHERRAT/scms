@@ -2,7 +2,7 @@
 
 
 <x-app-layout>
-<div class=" mt-9 ml-2 "><a href="{{ route('student.create') }}" class="focus:outline-none text-white bg-fuchsia-700 hover:bg-fuchsia-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">ADD STUDENT</a></div>
+<div class=" mt-9 ml-2 "><a href="{{ route('student.create') }}" class="focus:outline-none text-white bg-emerald-700 124567890hjklñ´ç focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">ADD STUDENT</a></div>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-2 ... mr-4 ... mt-6 ..."  style="width:90%;margin-left:5%">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-9 ">

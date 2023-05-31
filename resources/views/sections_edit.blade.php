@@ -66,7 +66,7 @@
             @endif
         </div>
 
-        <button type="submit" class="bg-fuchsia-700 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none">Update</button>
+        <button type="submit" class="bg-emerald-700 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none">Update</button>
     </form>
 
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>

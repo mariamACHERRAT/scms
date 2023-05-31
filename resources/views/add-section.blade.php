@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Add Section</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
@@ -72,13 +72,13 @@
       </div>
 
       <button type="button" onclick="addQuestion()"
-        class="bg-red-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Add
+        class="bg-red-300 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Add
         Question</button>
 
     </div>
 
     <button type="submit"
-      class=" bg-fuchsia-700 text-white rounded-md px-4 py-2  focus:outline-none focus:ring-2 focus:ring-blue-500">Add
+      class="bg-emerald-700 text-white rounded-md px-4 py-2  focus:outline-none focus:ring-2 focus:ring-blue-500">Add
        section</button>
   </form>
 
@@ -261,7 +261,7 @@ function addChoice(button, index) {
 
       var addChoiceButton = document.createElement("button");
       addChoiceButton.type = "button";
-      addChoiceButton.className = "bg-red-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500";
+      addChoiceButton.className = "bg-red-400 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500";
       addChoiceButton.innerHTML = "Add Choice";
       addChoiceButton.dataset.choiceName = "choices_" + (questionCount) + "[]";
       addChoiceButton.onclick = function() {

@@ -8,7 +8,7 @@
   <!-- Tailwind CSS -->
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
-  <title>Tailwind CSS CDN</title>
+  <title>Course Details</title>
   <style>
     body {
       background-color: #F5F7FA;
@@ -18,9 +18,10 @@
 <body>
 
 <x-app-layout>
+<h1 class="text-xl text-center mt-12 text-green-600">Directed by MR.{{ $course->professor->name }}</h1>
 <?php $user =Auth::user()?>
-@if ($user->is_prof)
-  <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-fuchsia-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " >Publish</a></div>
+@if ($user->is_prof && $user->id === $course->user_id)
+  <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-emerald-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " >Publish</a></div>
   @endif  
   <div class="pt-6 bg-gray-50">
     <div id="card" class="">
@@ -36,7 +37,7 @@
           <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
             <div class="flex justify-end items-center">
             <?php $user =Auth::user()?>
-          @if ($user->is_prof)
+          @if ($user->is_prof && $user->id === $course->user_id)
               <a href="{{ route('courses.edit', ['id' =>  $course->id]) }}" class="mr-4">
                 <img src="{{ asset('image/modify.png') }}" class="w-20" alt="Modifier" style="max-height: 20px; width:20px;">
               </a>

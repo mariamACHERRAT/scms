@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Courses</title>
     @vite('resources/css/app.css')
     <style>
          .course-description {
@@ -44,7 +44,7 @@
                     <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills}}</span>
                     <!-- <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills}}</span>
                     <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">{{ $course->skills}}</span> -->
-                    <a href="{{ route('send-request', ['student_name' => Auth::user()->name, 'course_id' => $course->id]) }}" class="inline-block bg-fuchsia-700  focus:outline-none focus:ring-4 text-white font-medium rounded-lg text-sm px-5 py-2.5 ml-12 mb-2" >
+                    <a href="{{ route('send-request', ['student_name' => Auth::user()->name, 'course_id' => $course->id]) }}" class="inline-block bg-emerald-700  focus:outline-none focus:ring-4 text-white font-medium rounded-lg text-sm px-5 py-2.5 ml-6 mb-2 mt-12" style="width:80%;text-align:center">
                         Send Request
                     </a>
                 </div>

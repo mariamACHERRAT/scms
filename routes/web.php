@@ -13,6 +13,7 @@ use App\Http\Controllers\TaskAnswerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\CheckRoles;
 use App\Http\Controllers\TestAnswerController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +29,11 @@ use App\Http\Controllers\TestAnswerController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('aboutus');
 Route::get('/aboutCourse/{id}', [HomeController::class, 'show'])->name('aboutcourse');
-
-
 Route::get('/cours', [CourseController::class, 'display'])->name('cours');
 Route::get('/courses/{id}', [CourseController::class, 'show'])->name('course.show');
+
+
+
 
 //forgot password 
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -101,15 +103,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/add-section', function () {
             return view('add-section');
         })->name("add.section");
-        Route::get('/sections', [SectionController::class, 'index'])->name('sections.index');
+       
         Route::get('/sections/create', [SectionController::class, 'create'])->name('sections.create');
         Route::get('/courses/{course_id}/sections/create', [SectionController::class, 'create'])->name('sections.create');
         Route::post('/sections', [SectionController::class, 'store'])->name('sections.store');
         Route::delete('/sections/{id}', [SectionController::class, 'destroy'])->name('sections.destroy');
         Route::get('/sections/{id}/edit', [SectionController::class, 'edit'])->name('sections.edit');
         Route::put('/sections/{id}', [SectionController::class, 'update'])->name('sections.update');
-
-
         //tasks answers
         Route::get('/task-answers/{sectionId}', [TaskAnswerController::class, 'showTaskAnswers'])->name('task-answers');
 
@@ -117,7 +117,7 @@ Route::middleware('auth')->group(function () {
 
 
     });
-
+    Route::get('/sections', [SectionController::class, 'index'])->name('sections.index');
     Route::get('/requests', [RequestController::class, 'showRequests'])->name('requests');
     Route::get('/sections/{id}', [SectionController::class, 'show'])->name('sections.show');
     Route::get('/send-request/{student_name}/{course_id}', [RequestController::class, 'sendRequest'])->name('send-request');

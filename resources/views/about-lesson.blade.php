@@ -72,16 +72,17 @@
   </div>
 
   <!--Main-->
-  <div class="p-10 flex flex-wrap bg-gray-50" style="padding-right: 0;margin:0;">
-    <div  style=";margin-top:10px;width:45%">
-      <p style="font-size:30px;margin-left:38%;color:black">{{ $course->title }}</p>
-      <p class="mt-2 text-gray-600">
-              {{ $course->content }}
-        </p>
+  <div class="p-10 flex flex-wrap bg-gray-50" style="padding-right: 0;margin:0;width:100%">
+  <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="{{ asset('images/' . $course->image) }}" alt="">
+
+  <a href="#" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" >
+    <div class="flex flex-col justify-between p-4 leading-normal" style="width:90%">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $course->title }}</h5>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> {{ $course->content }}</p>
     </div>
-    <div class="flex items-center justify-center ml-auto" style="width:50%;max-height:400px">
-      <img class="w-full" src="{{ asset('images/' . $course->image) }}" alt="Mountain" style="max-height:400px" >
-    </div>
+</a>
+  
+   
   </div>
 </div>
 
@@ -93,11 +94,10 @@ Our expert instructors are passionate about delivering high-quality education th
 </p>
  </div>
 
- <p style="font-size:30px;margin-left:15%;margin-top:30px;color:black">Skills You Will Gain</p>
+ <p style="font-size:30px;margin-left:15%;margin-top:30px;color:black">Skill You Will Gain</p>
     <div class="px-6 pt-4 pb-2" style="margin-left:5%;border:solid 1px gray;padding:3%;margin-top:30px">
         <span class="inline-block bg-black rounded-full px-7 py-3   text-white mr-2 mb-2"> {{ $course->skills}}</span>
-        <span class="inline-block bg-black rounded-full px-7 py-3  text-white mr-2 mb-2"> {{ $course->skills}}</span>
-        <span class="inline-block bg-black rounded-full px-7 py-3 text-white mr-2 mb-2"> {{ $course->skills}}</span>
+
       </div>
  <div>
 

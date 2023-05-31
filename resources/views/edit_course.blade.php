@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Couse Edit</title>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="resources\css\app.css.css">
 </head>
@@ -42,7 +42,7 @@
         </div>
       <input type="hidden" name="user_id" value="{{ Auth::id() }}">
 
-      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">ADD</button>
+      <button type="submit" class="bg-emerald-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
     </form>
 </body>
 </html>

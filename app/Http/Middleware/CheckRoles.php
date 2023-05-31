@@ -10,14 +10,14 @@ class CheckRoles
     public function handle(Request $request, Closure $next, $role)
     {
         if ($role === 'is_admin' && !auth()->user()->is_admin) {
-            return redirect('/dashboard');
+            return redirect('/cours');
         }
 
         if ($role === 'is_prof' && !auth()->user()->is_prof) {
-            return redirect('/dashboard');
+            return redirect('/cours');
         }
         if ($role === 'is_etudiant' && auth()->user()->is_etudiant) {
-            return redirect('/dashboard');
+            return redirect('/cours');
         }
 
         return $next($request);

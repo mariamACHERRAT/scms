@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Courses</title>
     @vite('resources/css/app.css')
 
     <style>
@@ -23,7 +23,7 @@
 <body>
 
 <x-app-layout>    
-<div style="margin-top:20px;margin-left:86%;"><a href="{{ route('course.create') }}" class="focus:outline-none text-white bg-green-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-800">ADD COURSE</a>
+<div style="margin-top:20px;margin-left:86%;"><a href="{{ route('course.create') }}" class="focus:outline-none text-white bg-emerald-700 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-800">ADD COURSE</a>
 </div>
 
 

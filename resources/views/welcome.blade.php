@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Home</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -34,7 +34,7 @@ body{
         margin-top: 20px; /* Add margin to separate from the main content */
       }
 #container {
-        background-image: url("image/header.png");
+        background-image: url("image/images.jpg");
         background-size: cover;
         background-position: center;
         margin: 0;
@@ -140,16 +140,12 @@ body{
 
         <!--Right Col-->
         <div class="w-full xl:w-3/5 p-12 overflow-hidden">
-          <img class="mx-auto w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" src="{{ asset('image/onligne.jpg') }}"/>
+          <img class="mx-auto w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" src="{{ asset('image/formation-en-ligne.jpg') }}"/>
         </div>
 
        
 
-        <!--Footer-->
-        <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
-          <a class="text-gray-500 no-underline hover:no-underline" href="#">&copy; 2023</a>
-          
-        </div>
+       
       </div>
     </div>
 
@@ -157,38 +153,42 @@ body{
 
 
 
-
-
-
-<h1 style="font-size: 30px;margin-left:2%;margin-top:0px">Our latest programs</h1>
-    <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+    <h1 style="font-size: 30px; margin-left: 2%; margin-top: 20px;">Our latest programs</h1>
+ 
+    
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     <!--Card 1-->
         @foreach($latestCourses as $course)
-        <a href="{{ route('aboutcourse', $course->id) }}">
-
+      
     <div class="rounded overflow-hidden shadow-lg" style=" background-color: white;max-width: 300px; border-radius: 11px;min-height: 500px;">
       <img class="w-full " src="{{ asset('images/' . $course->image) }}" style="max-height: 200px;min-height: 200px;" alt="Mountain">
       <div class="px-6 py-4">
-        <div class="text-xl text-black mb-2" style="text-align: center;"> {{ $course->title }}</div>
+        <div class="font-bold text-xl mb-2" style="text-align: center;"> {{ $course->title }}</div>
         <h5 class="text-green-800" >Content</h5>
-        <div class="course-description">
-        <p class="text-gray-600 text-base">
+        <p class="text-gray-300 text-base" >
+        <div class="course-description" style="color:gray">
          {{ $course->content}}
+    </div>
          </h4>
-          </div>
       </div>
       <h6 class="text-green-800 text-xs" style="margin-left: 17px">
-          SKILLS LEARNED FROM THE LESSON
+          SKILL LEARNED FROM THE LESSON
 </h6>
       <div class="px-6 pt-4 pb-2">
-        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2"> {{ $course->skills}}</span>
-        
+        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span>
+        <!-- <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span>
+        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span> -->
       </div>
     </div>
-          </a>
     
-   
       @endforeach
 </div>
+
+
+ <!--Footer-->
+ <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
+          <a class="text-gray-500 no-underline hover:no-underline" >&copy; 2023</a>
+          
+        </div>
   </body>
 </html>

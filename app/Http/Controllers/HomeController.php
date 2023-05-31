@@ -19,11 +19,7 @@ class HomeController extends Controller
         return view('about');
     }
 
-    public function show($id)
-    {
-        $course = Course::with('sections')->findOrFail($id);
-        return view('about-lesson', compact('course'));
-    }
+ 
 
 
 

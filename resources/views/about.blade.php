@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>About</title>
     
   <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
   <!--Replace with your tailwind.css once created-->
@@ -13,8 +13,8 @@
 <body>
 
 <!-- Nav -->
-<div class=" w-full container bg-white border-b border-gray-100 h-20 shadow-lg" >
-  <div class="w-full flex items-center justify-between mx-auto px-4 mr-0" >
+<div class=" w-full container bg-white border-b border-gray-100 h-20 shadow-lg ml-2" >
+  <div class="w-full flex items-center justify-between  px-4 mr-0" >
     <a class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
       SC<span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">MC</span>
     </a>
@@ -42,9 +42,9 @@
 
 <div class="flex items-center">
   <!-- First Div: Title and Text -->
-  <div class="ml-12 mt-12">
+  <div class="ml-12 mt-12" style="width:50%">
         
-<a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+<a href="#" class="block  p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Abou Us</h5>
     <p class="font-normal text-xl text-gray-700 dark:text-gray-400">
     Welcome to our online training site !
@@ -58,12 +58,19 @@
 </div> 
   
 
-  <!-- Second Div: Image -->
-  <div class="ml-24">
-    <img src="{{ asset('image/about1.jpg') }}" alt="Image" style="width:500px">
-  </div>
+ 
 </div>
+ <!-- Second Div: Image  -->
+ <div class="ml-24 " style="margin-top:0px;margin-left:54%">
+    <img src="{{ asset('image/ph.jpg') }}" alt="Image" style="width:500px">
+  </div> 
 
+
+  <!--Footer-->
+ <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
+          <a class="text-gray-500 no-underline hover:no-underline" href="#">&copy; 2023</a>
+          
+        </div>
     
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Teacher Edit</title>
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -44,7 +44,7 @@
   </div>
 </div>
 </br>
-    <button type="submit" class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white">Update</button>
+    <button type="submit" class="block w-full rounded-lg bg-emerald-700 px-5 py-3 text-sm font-medium text-white">Update</button>
 </form>
 </div>
 </div>
