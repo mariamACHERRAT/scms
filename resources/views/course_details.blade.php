@@ -18,6 +18,10 @@
 <body>
 
 <x-app-layout>
+  <div style="margin-top:20px">
+  <a href="{{ route('generate-pdf', ['courseId' => $course->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-12 ">Download PDF</a>
+
+  </div>
 <h1 class="text-xl text-center mt-12 text-green-600">Directed by MR.{{ $course->professor->name }}</h1>
 <?php $user =Auth::user()?>
 @if ($user->is_prof && $user->id === $course->user_id)

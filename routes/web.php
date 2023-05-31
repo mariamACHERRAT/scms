@@ -32,7 +32,7 @@ Route::get('/aboutCourse/{id}', [HomeController::class, 'show'])->name('aboutcou
 Route::get('/cours', [CourseController::class, 'display'])->name('cours');
 Route::get('/courses/{id}', [CourseController::class, 'show'])->name('course.show');
 
-
+Route::get('/generate-pdf/{courseId}', [PDFController::class, 'generatePDF'])->name('generate-pdf');
 
 
 //forgot password 
