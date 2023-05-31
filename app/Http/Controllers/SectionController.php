@@ -138,15 +138,47 @@ public function update(Request $request, $id)
         $section->content = null;
         $section->video_link = null;
         $section->description = $validatedData['description'];
-
+    } elseif ($request->type === 'test') {
+        $questions = $request->input('questions');
+    
+        foreach ($questions as $index => $question) {
+            // Check if the question is not empty
+            if (!empty($question['question'])) {
+                $sectionId = $section->id; // Assuming the section ID is available in the $section object
+    
+                // Retrieve the question model using the question ID and section ID
+                $questionModel = Question::where('id', $index)
+                    ->where('section_id', $sectionId)
+                    ->first();
+    
+                if ($questionModel) {
+                    $questionModel->question = $question["question"];
+                    $questionModel->answer_type = $question["answer_type"];
+                    $questionModel->save();
+    
+                    // Delete existing choices associated with the question
+                    $questionModel->choices()->delete();
+    
+                    if (isset($question["choices"])) { // Check if choices exist for the current question
+                        $qchoices = $question["choices"];
+                        $correct = $question["is_correct"];
+                        foreach ($qchoices as $key => $value) {
+                            $choice = new Choice; // Create a new Choice instance
+                            $choice->question_id = $questionModel->id;
+                            $choice->choice = $value;
+                            $choice->is_correct = in_array($key, $correct);
+                            $choice->save();
+                        }
+                    }
+                }
+            }
+        }
     }
-
+    
     $section->save();
 
     return redirect('/sections/'.$section->id);
 }
-
-
 
   
 }

@@ -14,7 +14,7 @@
         <h2 class="text-2xl font-bold mb-4">Test Result</h2>
 
         <div class="bg-white shadow-md rounded-lg p-6">
-            <p class="text-lg">Your score: <span class="{{ $result->score >= 10 ? 'text-green-600' : 'text-red-600' }}">{{ $result->score }}/20</span></p>
+            <p class="text-xl">Your score: <span class="{{ $result->score >= 10 ? 'text-green-600' : 'text-red-600' }}">{{ $result->score }}/20</span></p>
             <p class="text-gray-500">Section: {{ $section->title }}</p>
             <!-- Additional details or information you want to display -->
 

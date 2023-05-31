@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Rainblur Landing Page Template: Tailwind Toolbox</title>
+    <title>Document</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -182,8 +182,7 @@ body{
 </h6>
       <div class="px-6 pt-4 pb-2">
         <span class="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2"> {{ $course->skills}}</span>
-        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2"> {{ $course->skills}}</span>
-        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2"> {{ $course->skills}}</span>
+        
       </div>
     </div>
           </a>

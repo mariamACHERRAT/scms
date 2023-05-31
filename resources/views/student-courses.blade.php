@@ -7,7 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite('resources/css/app.css')
+
+    <style>
+
+.course-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* Limit the description to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+      }
+    </style>
 </head>
+
 <body>
 
 <x-app-layout>    
@@ -27,16 +39,18 @@
         <div class="font-bold text-xl mb-2" style="text-align: center;"> {{ $course->title }}</div>
         <h5 class="text-green-800" >Content</h5>
         <p class="text-gray-600 text-base">
+        <div class="course-description">
          {{ $course->content}}
+    </div>
          </h4>
       </div>
       <h6 class="text-green-800 text-xs" style="margin-left: 17px">
-          SKILLS LEARNED FROM THE LESSON
+          SKILL LEARNED FROM THE LESSON
 </h6>
       <div class="px-6 pt-4 pb-2">
         <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span>
-        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span>
-        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span>
+        <!-- <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span>
+        <span class="inline-block bg-black rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"> {{ $course->skills}}</span> -->
       </div>
     </div>
     

@@ -16,11 +16,11 @@
 <body>
 <x-app-layout>
 
-<div class="h-screen" style="margin-top:40px;margin-left:18%">
+<div class="h-screen" style="margin-top:40px;margin-left:5%">
 
-    <div class="bg-white shadow-gray-500 rounded p-4" style="max-width: 80%;min-width:60%;margin-top:1px">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{ $section->title }}</h5>
-
+    <div class="bg-white shadow-gray-500 rounded p-4" style="max-width: 95%;min-width:60%;margin-top:1px;padding:2%;padding-left:5%;padding-right:5%;line-height:2;">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-sky-700 dark:text-white text-center">{{ $section->title }}</h5>
+    <br></br>
    
     @if ($section->type === 'test')
     <!-- Display the content of the test -->
@@ -32,7 +32,7 @@
     <form method="post" action="{{ route('tests.submit', $section) }}">
     @csrf
     @foreach ($section->questions as $question)
-        <p style="font-size:18px;margin-top:10px;margin-bottom:10px">{{ $question->question }}</p>
+    <strong>   <p style="font-size:18px;margin-top:10px;margin-bottom:10px">{{ $question->question }}</p> </strong>
         <div class="flex">
             @foreach ($question->choices as $choice)
                 <div class="mr-4">
@@ -51,7 +51,7 @@
 @if ($user->is_prof)
     <h4 class="text-fuchsia-500">Your Test Content</h4>
     @foreach ($section->questions as $question)
-        <p style="font-size:18px;margin-top:10px;margin-bottom:10px">{{ $question->question }}</p>
+    <strong> <p style="font-size:18px;margin-top:10px;margin-bottom:10px">{{ $question->question }}</p></strong>
         <div class="flex">
             @foreach ($question->choices as $choice)
                 <div class="mr-4">
@@ -60,7 +60,7 @@
                 </div>
             @endforeach
         </div>
-        <hr>
+     <br></br>
     @endforeach
 @endif
     @endif
@@ -95,8 +95,8 @@
                         {!! $section->content !!}
                     </div>
                 @elseif ($section->type === 'video')
-                    <div id="videoField" class="mb-4" style="margin-left:15%">
-                        <iframe width="560" height="315" src="{{ $section->video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div id="videoField" class="mb-4" style="margin-left:20%">
+                        <iframe width="720" height="460" src="{{ $section->video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 @elseif ($section->type === 'task')
                     <div id="taskField" class="mb-4">
@@ -147,6 +147,7 @@
     </div>
     
 </div>
+
 
 
 

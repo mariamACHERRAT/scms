@@ -21,11 +21,23 @@
             <ul class="flex flex-wrap justify-center">
                 @foreach ($taskAnswers as $taskAnswer)
                     <li>
-                        <div class="m-8 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <div class="m-8 block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" style="margin-top:600px;max-width:80%;margin-left:10%">
                             <p class="text-center mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white">{{ $taskAnswer->user->name }}</p>
                             <p class="text-center mb-2 text-base font-bold tracking-tight text-purple-500 dark:text-white">{{ $taskAnswer->user->class }}</p>
                             <p class="font-normal text-gray-700 dark:text-gray-400">{!! $taskAnswer->task_answer !!}</p>
                             <a href="{{ asset('images/' . $taskAnswer->answer_file) }}">{{ $taskAnswer->answer_file }}</a>
+                            @if ($taskAnswer)
+    <h4 class="text-red-500-xl ">The Answer</h4>
+    <p>{!!$taskAnswer->task_answer!!}</p>
+    <h4 class="text-red-500">The  Point</h4>
+    @if ($taskAnswer->point !== null)
+            <p>Point: {{$taskAnswer->point}}</p>
+        @endif
+        <p>{{$taskAnswer->note}}</p>
+       
+   
+    @endif
+    <hr>
                             <div class="mt-4">
                             @if (!$taskAnswer->point)
                                 <form action="{{ route('send-score', ['taskAnswerId' => $taskAnswer->id]) }}" method="POST">
@@ -45,18 +57,7 @@
                                 @endif
                                 <div id="answer">
     
-    @if ($taskAnswer)
-    <h4 class="text-red-500">The Answer</h4>
-    <p>{!!$taskAnswer->task_answer!!}</p>
-    <h4 class="text-red-500">The  Point</h4>
-    @if ($taskAnswer->point !== null)
-            <p>Point: {{$taskAnswer->point}}</p>
-        @endif
-        <p>{{$taskAnswer->note}}</p>
-       
    
-    @endif
-    <hr>
 </div>
                             </div>
                         </div>

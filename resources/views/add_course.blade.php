@@ -21,13 +21,13 @@
         <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" id="content" name="content" required></textarea>
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Skills</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Skill</label>
         <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           type="text" id="skills" name="skills" ><br></br>
-        <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+        <!-- <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           type="text" id="skills" name="skills" ><br></br>
         <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          type="text" id="skills" name="skills" >
+          type="text" id="skills" name="skills" > -->
       </div>
       
       <div class="mb-4">

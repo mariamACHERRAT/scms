@@ -57,12 +57,12 @@
               {{ $course->content }}
             </p>
             <p class="text-sm text-green-800 uppercase tracking-wide font-semibold mt-2">
-              SKILLS LEARNED FROM THE LESSON
+              SKILL LEARNED FROM THE LESSON
             </p><br></br>
             <div class="flex items-center">
               <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span>
-              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span>
-              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span>
+              <!-- <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span>
+              <span class="inline-block bg-black px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 rounded-full ...">{{ $course->skills }}</span> -->
             </div>
             <?php $user =Auth::user()?>
             @if ($user->is_prof)
