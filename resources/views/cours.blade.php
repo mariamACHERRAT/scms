@@ -25,7 +25,7 @@
 
         <!--Card 1-->
         @foreach($courses as $course)
-        <a href="{{ route('course.show', $course->id) }}">
+        <!-- <a href="{{ route('course.show', $course->id) }}"> -->
             <div class="rounded overflow-hidden shadow-lg flex flex-wrap items-start" style=" background-color: white; max-width: 300px; border-radius: 11px; min-height: 500px;">
                 <img class="w-full" src="{{ asset('images/' . $course->image) }}" style="max-height: 200px; min-height: 200px;" alt="Mountain">
                 <div class="px-6 py-4">
@@ -49,7 +49,7 @@
                     </a>
                 </div>
             </div>
-        </a>
+        <!-- </a> -->
         @endforeach
     </div>
   

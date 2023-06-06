@@ -122,6 +122,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/sections/{id}', [SectionController::class, 'show'])->name('sections.show');
     Route::get('/send-request/{student_name}/{course_id}', [RequestController::class, 'sendRequest'])->name('send-request');
     Route::get('/confirm-request/{request}', [RequestController::class, 'confirmRequest'])->name('confirm-request');
+    Route::delete('/requests/{request_id}', [RequestController::class, 'deleteRequest'])->name('delete-request');
+    Route::delete('/delete-student/{request_id}', [RequestController::class, 'deleteStudent'])->name('delete-student');
+
+    Route::get('/courses/{course}/confirmed-students', [RequestController::class, 'showConfirmedStudents'])->name('confirmed-students');
+
     Route::get('/my-course',[StudentCourseController::class, 'myCourse'] )->name('my-course');
     Route::post('/send-task-answer/{userName}/{sectionId}', [TaskAnswerController::class, 'sendTaskAnswer'])->name('send-task-answer');
     Route::get('/task-answers/student/{sectionId}', [TaskAnswerController::class, 'showTaskAnswersForStudent'])->name('task-answers.student');

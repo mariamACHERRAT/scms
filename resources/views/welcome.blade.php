@@ -144,7 +144,11 @@ body{
         </div>
 
        
-
+ <!--Footer-->
+ <div style=" visibility: hidden;" class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
+  <a class="text-gray-500 no-underline hover:no-underline" >&copy; 2023</a>
+          
+        </div>
        
       </div>
     </div>
@@ -183,12 +187,61 @@ body{
     
       @endforeach
 </div>
+<div class="flex items-center">
+  <!-- First Div: Title and Text -->
+  <div class="ml-12 mt-12" style="width:50%">
+        
+<a href="#" class="block  p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-bleu-900 dark:text-white">Abou Us</h5>
+    <p class="font-normal text-base text-gray-700 dark:text-gray-400">
+    Welcome to our online training site !
+      We are SCMC the first private institute for professional training in logistics and transport in tetouan, a company dedicated to providing quality training in the field of management and transport. Our goal is to help professionals acquire the skills necessary to excel in their respective fields.
+      Our team of qualified and experienced experts ensures the creation of high quality educational content and the implementation of comprehensive training programs.
+      Browse through our site to discover our different training courses and do not hesitate to contact us if you have any questions or if you wish to register for one of our programs.
+    
+      
+    </p>
+</a>
+</div> 
+  
 
+ 
+</div>
 
- <!--Footer-->
- <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
-          <a class="text-gray-500 no-underline hover:no-underline" >&copy; 2023</a>
+ <!-- Second Div: Image  -->
+ <div class="ml-24 " style="margin-top:0px;margin-left:54%">
+    <img src="{{ asset('image/ph.jpg') }}" alt="Image" style="width:500px">
+  </div> <br></br>
+<!-- This is an example component -->
+<div class=" bg-gray-900">
+    <div class="max-w-2xl mx-auto text-white py-10">
+        <div class="text-center">
+            <h3 class="text-3xl mb-3"> Download our app </h3>
+            <p> Learn with us. All day every day. </p>
+            <div class="flex justify-center my-10">
+                <div class="flex items-center border w-auto rounded-lg px-4 py-2 w-52 mx-2">
+                    <img src="https://cdn-icons-png.flaticon.com/512/888/888857.png" class="w-7 md:w-8">
+                    <div class="text-left ml-3">
+                        <p class='text-xs text-gray-200'>Download on </p>
+                        <p class="text-sm md:text-base"> Google Play Store </p>
+                    </div>
+                </div>
+                <div class="flex items-center border w-auto rounded-lg px-4 py-2 w-44 mx-2">
+                    <img src="https://cdn-icons-png.flaticon.com/512/888/888841.png" class="w-7 md:w-8">
+                    <div class="text-left ml-3">
+                        <p class='text-xs text-gray-200'>Download on </p>
+                        <p class="text-sm md:text-base"> Apple Store </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
+            <p class="order-2 md:order-1 mt-8 md:mt-0"> &copy; SCMC, 2023. </p>
           
         </div>
+    </div>
+</div>
+
+ 
   </body>
 </html>

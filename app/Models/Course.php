@@ -21,6 +21,11 @@ class Course extends Model
     return $this->belongsTo(User::class, 'user_id');
 }
 
+public function acceptedStudents()
+{
+    return $this->belongsToMany(User::class, 'requests')->wherePivot('status', 'accepted');
+}
+
 
 
     protected $fillable = ['title', 'image', 'content', 'skills','user_id,is_publick'];

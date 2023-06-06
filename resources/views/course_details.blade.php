@@ -18,14 +18,13 @@
 <body>
 
 <x-app-layout>
-  <div style="margin-top:20px">
-  <a href="{{ route('generate-pdf', ['courseId' => $course->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-12 ">Download PDF</a>
 
-  </div>
-<h1 class="text-xl text-center mt-12 text-green-600">Directed by MR.{{ $course->professor->name }}</h1>
+<h1 class="text-xl text-center mt-12 text-green-600">Directed by MR.{{ $course->user->name }}</h1>
 <?php $user =Auth::user()?>
 @if ($user->is_prof && $user->id === $course->user_id)
   <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-emerald-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " >Publish</a></div>
+  <div style="margin-top:20px;margin-left:86%;"><a  href="{{ route('confirmed-students', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-emerald-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " >Students Involved</a></div>
+
   @endif  
   <div class="pt-6 bg-gray-50">
     <div id="card" class="">

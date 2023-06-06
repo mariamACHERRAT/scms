@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         $user = Auth::user();
         if ($user->is_admin) {
-            return redirect()->route('dashboard');
+            return redirect()->route('cours');
         } elseif ($user->is_prof) {
             return redirect()->route('teacher_list');
         } else {

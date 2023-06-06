@@ -14,11 +14,11 @@
   Plugins:
     - @tailwindcss/forms
 -->
-
+<x-app-layout>   
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-lg">
    
-  <form method="POST" action="{{ route('students.store') }}" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">>
+  <form method="POST" action="{{ route('students.store') }}" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
     @csrf
 
 
@@ -61,25 +61,26 @@
     id="class"
     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
     placeholder="Class"
-  />
-</div>
-        </div>
-      </div>
-</br>
-
-
-
-      <button
+  /><br></br>
+  <button
         type="submit"
         class="block w-full rounded-lg bg-emerald-700 px-5 py-3 text-sm font-medium text-white"
       >
        ADD
       </button>
+</div>
+        </div>
+      </div>
+
+
+
+
+    
 
       
     </form>
   </div>
 </div>
-
+</x-app-layout>   
 </body>
 </html>

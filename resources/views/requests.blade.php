@@ -22,6 +22,7 @@
     </thead>
     <tbody>
     @foreach ($requests as $request)
+    @if($request->status == 'pending')
       <tr class="border-b dark:border-neutral-500">
         <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $request->user->name }}</td>
         <td class="whitespace-nowrap px-6 py-4">{{ $request->user->class }}</td>
@@ -32,8 +33,15 @@
             <img style="max-width:30px" src="{{ asset('images/confirm.png') }}" alt="">
             </a>
         </td>
-       <a> <td class="whitespace-nowrap px-6 py-4"><img style="max-width:30px" src="{{ asset('images/refuse.png') }}" alt=""></td> </a>
+        <td class="whitespace-nowrap px-6 py-4">
+        <form action="{{ route('delete-request', ['request_id' => $request->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+          </form>
+        </td> 
       </tr>
+      @endif
     @endforeach
     </tbody>
   </table>
