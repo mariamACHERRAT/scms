@@ -27,7 +27,7 @@ class SectionController extends Controller
 
 public function store(Request $request)
 {
-    // dd($request);
+
     
     $section = new Section;
     $section->title = $request->title;
@@ -37,11 +37,11 @@ public function store(Request $request)
     $section->video_link = $request->video_link ?? null;
     $section->description = $request->description ?? null;
     $section->course_id = $request->id;
-    if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('images'), $fileName);
-        $section->section_file = $fileName;
+    if ($request->hasFile('image') || $request->hasFile('task_image')) {
+        $image = $request->file('image') ? $request->file('image') : $request->file('task_image') ;
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $filename);
+        $section->section_file = $filename;
     }
     $section->save();
 

@@ -57,7 +57,7 @@ class TaskAnswerController extends Controller
     // You can send a notification or an email to the teacher informing about the request
 
     // Redirect back with a success message
-    return Redirect::route('sections.index')->with('success', 'Request sent successfully');
+    return Redirect::route('cours')->with('success', 'Request sent successfully');
 
 }
 

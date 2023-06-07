@@ -93,6 +93,7 @@
                 @if ($section->type === 'text')
                     <div id="contentField" class="mb-4">
                         {!! $section->content !!}
+                        <img class="" src="{{ asset('images/' . $section->section_file) }}" style="max-height: 200px; min-height: 200px;" alt="Mountain">
                     </div>
                 @elseif ($section->type === 'video')
                     <div id="videoField" class="mb-4" style="margin-left:20%">

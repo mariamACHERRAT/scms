@@ -18,7 +18,7 @@
   <form method="POST" action="{{ route('sections.store') }}"
     class="p-10 mt-10 mx-auto max-w-lg border-solid border-2 border-gray-400 " style="border-radius:10px;"
     enctype="multipart/form-data">
-    @csrf
+    {{ csrf_field() }}
     <input type="hidden" name="id" value="{{$id}}">
     <div class="mb-4">
       <label for="title" class="block font-medium mb-2">Titre de la section</label>
@@ -41,6 +41,9 @@
       <div class="mb-4">
         <label class="block">Content</label>
         <textarea name="content" class="ckeditor"></textarea>
+        <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image du produit</label>
+        <input type="file" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" id="image" name="image">
+
       </div>
     </div>
 
@@ -59,7 +62,7 @@
           class="ckeditor"></textarea>
           <div class="mb-4">
                   <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image du produit</label>
-                 <input type="file" style="display: none;" id="imageInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" name="image">
+                 <input type="file" style="display: none;" id="imageInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" name="task_image">
                  <img src="{{ asset('image/addfile.png') }}" style="border-radius:50%;width:70px;cursor:pointer;" alt="Course Image" onclick="document.getElementById('imageInput').click();">
                      <p id="uploadStatus"></p>
                 </div>

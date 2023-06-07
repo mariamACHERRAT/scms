@@ -19,7 +19,7 @@
 
 <x-app-layout>
 
-<h1 class="text-xl text-center mt-12 text-green-600">Directed by MR.{{ $course->user->name }}</h1>
+<h1 class="text-xl text-center mt-12 text-green-600">Created by MR.{{ $course->user->name }}</h1>
 <?php $user =Auth::user()?>
 @if ($user->is_prof && $user->id === $course->user_id)
   <div style="margin-top:20px;margin-left:86%;"><a href="{{ route('publish-course', ['course' => $course->id]) }}" class="focus:outline-none text-white bg-emerald-700 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " >Publish</a></div>

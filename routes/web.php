@@ -132,7 +132,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/task-answers/student/{sectionId}', [TaskAnswerController::class, 'showTaskAnswersForStudent'])->name('task-answers.student');
     Route::post('/tests/submit/{section}',  [TestAnswerController::class, 'submit'])->name('tests.submit');
     Route::get('/tests/result/{section}/{result}', [TestAnswerController::class, 'showresult'])->name('tests.result');
+   
 
+   
 
 
 
